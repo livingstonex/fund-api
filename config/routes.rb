@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post "/events", to: "events#create"
   get "/events/:id", to: "events#show"
   put "/events/:id", to: "events#update"
+  get "/search", to: "events#search"
 
   # Routes for Event registration
   resources :registrations

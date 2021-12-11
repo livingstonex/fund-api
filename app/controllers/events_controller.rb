@@ -11,6 +11,13 @@ class EventsController < ApplicationController
     render json: @events.offset(@page * EVENTS_PER_PAGE).limit(EVENTS_PER_PAGE)
   end
 
+  #SEARCH /events/search
+  def search
+    @events = Event.where("name LIKE ?", "%" + params[:q] + "%")
+
+    render json: @events
+  end
+
   # GET /events/1
   def show
     # @attendees = @event.users
