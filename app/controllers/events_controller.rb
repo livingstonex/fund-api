@@ -1,11 +1,14 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :update, :destroy]
+  EVENTS_PER_PAGE = 2;
 
   # GET /events
   def index
+    @page = params.fetch(:page, 0).to_i
+
     @events = Event.all
 
-    render json: @events
+    render json: @events.offset(@page * EVENTS_PER_PAGE).limit(EVENTS_PER_PAGE)
   end
 
   # GET /events/1
