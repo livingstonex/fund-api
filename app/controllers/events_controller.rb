@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :update, :destroy]
-  EVENTS_PER_PAGE = 2;
+  EVENTS_PER_PAGE = 20;
 
   # GET /events
   def index
@@ -21,6 +21,7 @@ class EventsController < ApplicationController
   # GET /events/1
   def show
     # @attendees = @event.users
+    # render json: @event.merge({photo: url_for(@event.photo)})
     render json: @event.to_frontend
   end
 
@@ -30,7 +31,7 @@ class EventsController < ApplicationController
     # @event.attach params[:image]
 
     if @event.save
-      @event.image.attach(params[:image]) if params[:image]
+      @event.photo.attach(params[:photo]) if params[:photo]
       render json: @event.to_frontend, status: :created, location: @event
     else
       render json: @event.errors, status: :unprocessable_entity
@@ -60,7 +61,7 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      byebug
-      params.permit(:name, :description, :start, :end, :image)
+      # byebug
+      params.permit(:name, :description, :start, :end, :photo)
     end
 end

@@ -1,9 +1,14 @@
 class Event < ApplicationRecord
     include Rails.application.routes.url_helpers
-    has_one_attached :image
-    validates:name, presence:true
     has_many :registrations
     has_many :users, through: :registrations
+    has_one_attached :photo
+    validates:name, presence:true
+    # validates:description, presence:true
+    # validates:start, presence:true
+    # validates:end, presence:true
+    # validates:image, presence:true
+    
 
     def to_frontend
         {
@@ -11,10 +16,8 @@ class Event < ApplicationRecord
             description: self.description,
             start: self.start,
             end: self.end,
-            image: self.image.attached? ? rails_blob_path(self.image, only_path: true) : nil,
-            attendees: self.users
-            # rails_blob_path(self.image, only_path: true) if self.image.attached?
-            # Rails.application.routes.url_helpers.url_for(self.image),
+            photo: self.photo.attached? ? polymorphic_url(self.photo, only_path: true) : nil,
+            attendees: self.users,
         }
     end
 end
