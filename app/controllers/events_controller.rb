@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :update, :destroy]
-  EVENTS_PER_PAGE = 20;
+  EVENTS_PER_PAGE = 5;
 
   # GET /events
   def index
@@ -8,7 +8,10 @@ class EventsController < ApplicationController
 
     @events = Event.all
 
-    render json: @events.offset(@page * EVENTS_PER_PAGE).limit(EVENTS_PER_PAGE)
+    @total = @events.count
+
+    # render json: @events.offset(@page * EVENTS_PER_PAGE).limit(EVENTS_PER_PAGE)
+    render json: { data: @events.offset(@page * EVENTS_PER_PAGE).limit(EVENTS_PER_PAGE), meta: { pages: (@total / EVENTS_PER_PAGE).ceil(), total: @total } }
   end
 
   #SEARCH /events/search
@@ -21,7 +24,7 @@ class EventsController < ApplicationController
   # GET /events/1
   def show
     # @attendees = @event.users
-    # render json: @event.merge({photo: url_for(@event.photo)})
+
     render json: @event.to_frontend
   end
 
