@@ -8,7 +8,7 @@ class Api::V1::RegistrationsController < Api::V1::ApplicationController
 
   # POST /registrations
   def create
-    @exists = Registration.exists?(user_id: params[:user_id])
+    @exists = Registration.exists?(user_id: params[:user_id], event_id: params[:event_id])
 
     if @exists
       render json: { message: "You have already registered for this event." }
