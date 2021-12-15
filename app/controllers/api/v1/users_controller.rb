@@ -11,7 +11,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
       @user = User.create(user_params)
       if @user.valid?
         token = encode_token({user_id: @user.id})
-        render json: { user: @user, token: token }
+        render json: { user: @user, token: token }, status: :created
       else
         render json: { error: "Invalid registration parameters" }
       end
