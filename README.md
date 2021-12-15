@@ -3,22 +3,23 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-Things you may want to cover:
+- Ruby version an Rails version
+  This project uses ruby version 3.0.3, and Rails version 6.1.4.1
 
-* Ruby version
+- Database creation
+  You can use any database of your choice, for this project, we have configured it to work with MySQL
 
-* System dependencies
+- Database initialization
+  Please create a MySQL database in xampp's php-myadmin called `fundapi`
 
-* Configuration
+- How to run the test suite
+  To run all tests, run this command in the terminal:
+  `rspec`
 
-* Database creation
+- Deployment instructions
+  To install this project on your local machine, follow the instructions below:
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. Clone the repo using the command: `git clone https://github.com/livingstonex/fund-api.git`
+2. Run: `bundle install` This would install the dependencies of the app
+3. Set up a database of your choice. The project uses MySQL, so if you decide to use MySQL, you'll have setup a xampp server and create a database named: `fundapi`
+4. Start up the server by running the command: `rails s -p 4000`
