@@ -41,7 +41,7 @@
         end
       end
 
-      # PATCH/PUT /events/1
+      # PUT /events/1
       def update
         if @event.update(event_params)
           @event.image.attach(params[:image]) if params[:image]
@@ -49,11 +49,6 @@
         else
           render json: @event.errors, status: :unprocessable_entity
         end
-      end
-
-      # DELETE /events/1
-      def destroy
-        @event.destroy
       end
 
       private

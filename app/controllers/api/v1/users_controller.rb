@@ -3,12 +3,18 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 
   # REGISTER
   def create
-    @user = User.create(user_params)
-    if @user.valid?
-      token = encode_token({user_id: @user.id})
-      render json: {user: @user, token: token}
+    @existing = User.exists?(email: params[:email])
+
+    if @existing
+      render json: { error: "User already exists" }
     else
-      render json: {error: "Invalid registration parameters"}
+      @user = User.create(user_params)
+      if @user.valid?
+        token = encode_token({user_id: @user.id})
+        render json: { user: @user, token: token }
+      else
+        render json: { error: "Invalid registration parameters" }
+      end
     end
   end
 
