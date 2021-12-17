@@ -11,7 +11,10 @@
         @total = @events.count
 
         # render json: @events.offset(@page * EVENTS_PER_PAGE).limit(EVENTS_PER_PAGE)
-        render json: { data: @events.offset(@page * EVENTS_PER_PAGE).limit(EVENTS_PER_PAGE), meta: { pages: (@total / EVENTS_PER_PAGE).ceil(), total: @total } }
+        render json: { 
+                        data: @events.offset(@page * EVENTS_PER_PAGE).limit(EVENTS_PER_PAGE), 
+                        meta: { pages: (@total / EVENTS_PER_PAGE).ceil(), total: @total } 
+                      }
       end
 
       #SEARCH /events/search
