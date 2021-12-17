@@ -5,7 +5,7 @@ describe 'User API', type: :request do
         it 'creates a new user' do
             expect {
                 post '/api/v1/signup', params: { firstname: 'David', lastname: 'Daniel', email: 'david.test@gmail.com', password: 'test@testpassword' }
-        }.to change { User.count }.from(4).to(5)
+        }.to change { User.count }.from(5).to(6)
     
             expect(response).to have_http_status(:created)
         end
