@@ -1,6 +1,6 @@
   class Api::V1::EventsController < Api::V1::ApplicationController
       before_action :set_event, only: [:show, :update, :destroy]
-      EVENTS_PER_PAGE = 5;
+      EVENTS_PER_PAGE = 20;
 
       # GET /events
       def index
